@@ -18,16 +18,12 @@
     <script src="./js/html5-qrcode.min.js" type="text/javascript"></script>
     <script src="./js/nacl-fast.min.js" type="text/javascript"></script>
     <script src="./js/nacl-util.min.js" type="text/javascript"></script>
+    <script src="./js/publicKey.js" type="text/javascript"></script>
     <script>
         var html5QrcodeScanner = new Html5QrcodeScanner(
             "reader", { fps: 10, qrbox: 250 });
 
         function validateQR(qrText) {
-            publicKey = Uint8Array.from([    6,  69,  34,   8, 156, 187, 211, 209,
-            180,  17, 163,  23,  58, 108,  43, 247,
-            227, 190, 120, 120,  32, 197, 142,  10,
-            44, 141,  18, 193,  96, 141,  67,  90
-            ])
             qrDataArray = nacl.util.decodeBase64(qrText)
             openArray = nacl.sign.open(qrDataArray, publicKey)
             if (openArray == null) {
